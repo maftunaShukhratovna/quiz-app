@@ -41,11 +41,12 @@ class HomeController{
         view('quiz/takequiz');
     }
 
-    public function updatequiz(int $quiz_id){
-        $data=(new Quizzes())->getbyoption($quiz_id);
-        view('dashboard/updatequiz', $data);
+    public function updatequiz(string $id){
+    
+        view('dashboard/updatequiz',['id'=>$id]);
 
     }
+
     public function components($route){
         view($route);
     }

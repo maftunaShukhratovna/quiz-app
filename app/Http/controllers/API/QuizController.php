@@ -35,17 +35,49 @@ class QuizController{
     }
 
     public function updateQuiz(int $quiz_id){
-        $auth = new class {
-            use Auth;
-        };
-        $user = $auth->user();
+        $quizItems = $this->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'timeLimit' => 'required',
+        ]);
 
-        $quiz= new Quizzes();
-        $data=$quiz->getbyoption($quiz_id);
-        dd($data);
-        //apiResponse(['message' => $data]); 
+        $quiz = new Quizzes();
+        $question = new Questions();
+        $option = new Options();
 
+        $quiz->update(
+            $quizItems['title'],
+            $quizItems['description'],
+            $quiz_id,
+            $quizItems['timeLimit'],
+        );
+
+        $question->delete($quiz_id);
+
+        $questions = $quizItems['questions'];
+
+        foreach ($questions as $questionItem) {
+            $question_id = $question->create($quiz_id, $questionItem['quiz']);
+            $correct = $questionItem['correct'];
+            foreach ($questionItem['options'] as $key => $optionItem) {
+                $option->create($question_id, $optionItem, $correct == $key);
+            }
+        }
+        apiResponse(['message' => 'quiz successfully updated'], 201);
     }
+
+ 
+
+    public function show(int $id){
+        $quiz = (new Quizzes())->find($id);
+        $questions = (new Questions())->getWithOptions($id);
+        apiResponse([
+            'quiz' => $quiz,
+            'questions' => $questions
+        ]);
+        
+    }
+
 
 
     public function store(){

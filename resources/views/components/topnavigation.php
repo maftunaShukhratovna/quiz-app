@@ -15,7 +15,7 @@
     <script type="module">
         async function fetchUserInfo() {
             try {
-                const { default: apiFetch } = await import('./js/utils/apiFetch.js');
+                const { default: apiFetch } = await import('/js/utils/apiFetch.js');
                 
                 const response = await apiFetch('/users/getInfo', { method: 'GET' });
                 
