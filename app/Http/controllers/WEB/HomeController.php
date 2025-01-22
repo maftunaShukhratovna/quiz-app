@@ -2,6 +2,8 @@
 
 namespace App\Http\controllers\WEB;
 
+use App\Models\Quizzes;
+
 class HomeController{
     public function home(){
         view('home');
@@ -39,10 +41,11 @@ class HomeController{
         view('quiz/takequiz');
     }
 
-    // public function updatequiz(){
-    //     view('dashboard/updatequiz');
+    public function updatequiz(int $quiz_id){
+        $data=(new Quizzes())->getbyoption($quiz_id);
+        view('dashboard/updatequiz', $data);
 
-    // }
+    }
     public function components($route){
         view($route);
     }

@@ -41,8 +41,9 @@ class QuizController{
         $user = $auth->user();
 
         $quiz= new Quizzes();
-        $data=$quiz->getByQuizId($quiz_id, $user['id']);
-        apiResponse(['message' => $data]); 
+        $data=$quiz->getbyoption($quiz_id);
+        dd($data);
+        //apiResponse(['message' => $data]); 
 
     }
 

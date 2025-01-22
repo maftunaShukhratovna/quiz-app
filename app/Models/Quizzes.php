@@ -50,4 +50,30 @@ class Quizzes extends DB{
         $stmt->execute();
         $stmt->close();
     }
+
+    public function getbyoption(int $quizId){
+        $conn = $this->getConnection();
+        $stmt = $conn->prepare( "
+        SELECT 
+            q.id AS question_id,
+            q.question_text,
+            o.id AS option_id,
+            o.option_text,
+            o.is_correct
+        FROM 
+            quizzes AS z
+        JOIN 
+            questions AS q ON z.id = q.quiz_id
+        JOIN 
+            options AS o ON q.id = o.question_id
+        WHERE 
+            z.id = ?
+    ");
+        $stmt->bind_param("i", $quizId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $stmt->close();
+        //dd($result->fetch_all(MYSQLI_ASSOC));
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
 }
