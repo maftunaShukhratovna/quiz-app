@@ -37,10 +37,6 @@ class HomeController{
         view('dashboard/statistic');
     }
 
-    public function takequiz(){
-        view('quiz/takequiz');
-    }
-
     public function updatequiz(string $id){
     
         view('dashboard/updatequiz',['id'=>$id]);

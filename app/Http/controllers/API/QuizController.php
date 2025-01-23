@@ -66,6 +66,14 @@ class QuizController{
         apiResponse(['message' => 'quiz successfully updated'], 201);
     }
 
+    public function showByUniqueValue(string $unique_value){
+        $quiz = (new Quizzes())->findByUniqueValue($unique_value);
+        $questions = (new Questions())->getWithOptions($quiz['id']);
+        apiResponse([
+            'quiz' => $quiz,
+            'questions' => $questions
+        ]);
+    }
  
 
     public function show(int $id){

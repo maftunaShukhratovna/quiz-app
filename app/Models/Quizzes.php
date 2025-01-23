@@ -54,6 +54,17 @@ class Quizzes extends DB{
         return $result->fetch_assoc();
     }
 
+    public function findByUniqueValue(string $unique_value){
+        $query = "SELECT * FROM quizzes WHERE unique_value = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("s", $unique_value);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $stmt->close();
+        return $result->fetch_assoc();
+
+    }
+
     
 
 }
