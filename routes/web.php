@@ -18,9 +18,9 @@ Router::get('/dashboard', [HomeController::class, 'homepage']);
 Router::get('/createquiz', [HomeController::class, 'createquiz']);
 Router::get('/myquiz', [HomeController::class, 'myquiz']);
 Router::get('/statistic', [HomeController::class, 'statistic']);
-Router::get('/takequiz', [QuizControllers::class, 'takequiz']);
+// Router::get('/takequiz', [QuizControllers::class, 'takequiz']);
 Router::get('/updatequiz/{id}', [HomeController::class, 'updatequiz']);
-
+Router::get('/take-quiz/{id}', [QuizControllers::class, 'takeQuiz']);
 
 Router::notFound();
 

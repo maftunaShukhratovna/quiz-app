@@ -7,8 +7,9 @@ use App\Models\DB;
 class Quizzes extends DB{
     public function create($title, $description, $user_id, $time_limit){
         $conn = $this->getConnection();
-        $stmt = $conn->prepare("INSERT INTO quizzes (title, description, user_id, time_limit, created_at, updated_at) VALUES (?, ?, ?, ?, NOW(), NOW())");
-        $stmt->bind_param("ssii", $title, $description, $user_id, $time_limit);
+        $stmt = $conn->prepare("INSERT INTO quizzes (unique_value, title, description, user_id, time_limit, created_at, updated_at) VALUES (?, ?, ?, ?, ?, NOW(), NOW())");
+        $unique_value = uniqid();
+        $stmt->bind_param("sssii", $unique_value, $title, $description, $user_id, $time_limit);
         $stmt->execute();
         $stmt->close();
         return $conn->insert_id;

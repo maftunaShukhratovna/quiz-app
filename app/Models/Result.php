@@ -23,7 +23,25 @@ class Result extends DB{
         }
         
         $stmt->close();
-        // return $conn->insert_id;
+        return $conn->insert_id;
+    }
+
+    public function find(int $id){
+        $query = "SELECT * FROM `results` WHERE id = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc();
+    }
+    
+    public function getUserResult(int $userId, int $quizId){
+        $query = "SELECT * FROM results WHERE user_id = ? AND quiz_id = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("ii", $userId, $quizId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc();
     }
     
 

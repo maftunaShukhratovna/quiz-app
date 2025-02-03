@@ -101,6 +101,7 @@ class QuizController{
         $quiz=new Quizzes();
         $question=new Questions();
         $options=new Options();
+        
         $auth = new class {
             use Auth;
         };
