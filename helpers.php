@@ -10,10 +10,7 @@ function redirect (string $url) {
     exit();
 }
 
-function assets($fileName): string
-{
-    return $_ENV['APP_URL'] . '/public/' . $fileName;
-}
+
 
 function dumpDie($value)
 {
@@ -26,4 +23,9 @@ function apiResponse($data, $status = 200): void
     http_response_code($status);
     echo json_encode($data);
     exit();
+}
+
+function assets($fileName): string
+{
+    return $_ENV['APP_URL'] . '/public/' . $fileName;
 }
