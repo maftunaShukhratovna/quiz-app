@@ -11,7 +11,6 @@ session_start();
 
 
 
-
 require 'helpers.php';
 
 if($_ENV['APP_DEBUG']){
