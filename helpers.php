@@ -10,6 +10,11 @@ function redirect (string $url) {
     exit();
 }
 
+function assets($fileName): string
+{
+    return $_ENV['APP_URL'] . '/public/' . $fileName;
+}
+
 function dumpDie($value)
 {
     var_dump($value);

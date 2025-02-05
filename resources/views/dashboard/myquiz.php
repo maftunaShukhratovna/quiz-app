@@ -60,7 +60,7 @@
         const quizList = document.getElementById('quizList');
 
         try {
-            const { default: apiFetch } = await import('/js/utils/apiFetch.js');
+            const { default: apiFetch } = await import("<?php echo assets('/js/utils/apiFetch.js') ?>");
             const data = await apiFetch('/quizzes', { method: 'GET' });
 
             // Check if data.message exists and is an array
@@ -118,7 +118,7 @@
 
     async function deleteQuiz(id){
         if(confirm('Are u sure')){
-            const {default: apiFetch} = await import('/js/utils/apiFetch.js');
+            const {default: apiFetch} = await import("<?php echo assets('/js/utils/apiFetch.js') ?>");
             const data = await apiFetch(`/quizzes/${id}`, {
                 method: 'DELETE'
             })

@@ -61,7 +61,7 @@
             let form = document.getElementById("form"),
                 formData = new FormData(form);
 
-            const { default: apiFetch } = await import('./js/utils/apiFetch.js');
+            const { default: apiFetch } = await import("<?php echo assets('/js/utils/apiFetch.js') ?>");
             
             try {
                 const data = await apiFetch('/login', { method: 'POST', body: formData });

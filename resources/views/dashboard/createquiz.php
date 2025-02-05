@@ -119,7 +119,7 @@
 
         const {
             default: apiFetch
-        } = await import('/js/utils/apiFetch.js');
+        } = await import("<?php echo assets('/js/utils/apiFetch.js') ?>");
 
         try {
             const data = await apiFetch('/quizzes', {
@@ -144,5 +144,5 @@
     }
     </script>
 
-    <script src="/js/utils/addquiz.js"></script>
+    <script src="<?php echo assets('/js/utils/addQuiz.js') ?>"></script>
     <?php require '../resources/views/components/footer.php' ?>
