@@ -26,18 +26,14 @@ class UserController
         );
     
         if ($userCreated) {
-
-            header('Content-Type: application/json');
-            echo json_encode([
+            apiResponse([
                 'message' => 'User created successfully',
                 'token' => $user->api_tokens,
             ]);
-            exit; 
+            
         } else {
-            header('Content-Type: application/json');
-            echo json_encode(['message' => 'User creation failed']);
-            http_response_code(400);
-            exit;
+            apiResponse(['message' => 'User creation failed'], 400);
+            
         }
     }
 
