@@ -14,9 +14,9 @@
                 <div class="flex justify-between items-center mb-6">
                     <h2 class="text-2xl font-bold text-gray-800">My Quizzes</h2>
                     <div class="flex space-x-4">
-                        <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700">
+                        <a href="createquiz" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700">
                             Create New Quiz
-                        </button>
+                        </a>
                         <div class="flex border rounded-lg">
                             <button class="px-3 py-2 bg-white border-r">
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -116,16 +116,17 @@
 
     quizzes();
 
+    const appUrl = '<?php echo $_ENV['APP_URL']; ?>'; // PHP qiymatini JS ga uzatish
     async function deleteQuiz(id){
         if(confirm('Are u sure')){
             const {default: apiFetch} = await import("<?php echo assets('/js/utils/apiFetch.js') ?>");
             const data = await apiFetch(`/quizzes/${id}`, {
                 method: 'DELETE'
             })
-                .then(data=>{
+                .then(data => {
                     window.location.reload();
                 })
-                .catch(error=>{
+                .catch(error => {
                     alert('check your internet.');
                 });
         }
@@ -133,13 +134,14 @@
 
     const copyContent = async (uniqueValue) => {
         try {
-            uniqueValue = '<?php echo $_ENV['APP_URL'] ?>' + '/take-quiz/' + uniqueValue;
-            await navigator.clipboard.writeText(uniqueValue)
-            alert('Content copied to clipboard')
+            uniqueValue = appUrl + '/take-quiz/' + uniqueValue;  // PHP URL'sini JS'da ishlatish
+            await navigator.clipboard.writeText(uniqueValue);
+            alert('Content copied to clipboard');
         } catch (err) {
             console.error("Failed to copy: ", err);
         }
     }
+
 </script>
 
 

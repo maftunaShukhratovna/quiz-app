@@ -22,10 +22,9 @@ function apiResponse($data, $status = 200): void
     header('Content-Type: application/json');
     http_response_code($status);
     echo json_encode($data);
-    exit();
 }
 
 function assets($fileName): string
 {
-    return $_ENV['APP_URL'] . '/public/' . $fileName;
+    return $_ENV['APP_URL'] .'/public/'.$fileName;
 }

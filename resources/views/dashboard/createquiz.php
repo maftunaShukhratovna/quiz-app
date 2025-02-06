@@ -144,5 +144,5 @@
     }
     </script>
 
-    <script src="<?php echo assets('/js/utils/addQuiz.js') ?>"></script>
+    
     <?php require '../resources/views/components/footer.php' ?>
